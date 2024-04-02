@@ -1,9 +1,9 @@
 pkgname=lighthouse-ethereum
-pkgver=4.5.0
+pkgver=5.1.3
 _pkgname=lighthouse
 pkgrel=1
 pkgdesc='Ethereum 2.0 client'
-arch=('x86_64')
+arch=('x86_64' 'aarch64')
 url='https://lighthouse.sigmaprime.io/'
 license=('Apache License 2.0')
 depends=('openssl')
