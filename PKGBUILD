@@ -51,6 +51,7 @@ makedepends=(
   'cmake'
   'clang'
   'git'
+  'leveldb'
   'protobuf'
 )
 if [[ "${_os}" == "GNU/Linux" ]]; then
