@@ -53,6 +53,15 @@ makedepends=(
   'git'
   'protobuf'
 )
+if [[ "${_os}" == "GNU/Linux" ]]; then
+  makedepends+=(
+    'postgresql-libs'
+  )
+elif [[ "${_os}" == "Android" ]]; then
+  makedepends+=(
+    'postgresql'
+  )
+fi
 _http="https://github.com"
 _ns="sigp"
 _url="${_http}/${_ns}/${_pkg}"
