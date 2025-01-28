@@ -22,6 +22,9 @@
 # Maintainer: Truocolo <truocolo@aol.com>
 # Maintainer: Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
 
+_os="$( \
+  uname \
+    -o)"
 _pkg=lighthouse
 pkgname="${_pkg}-ethereum"
 pkgver=6.0.1
@@ -56,17 +59,30 @@ _url="${_http}/${_ns}/${_pkg}"
 _tag_name="commit"
 _tag="${_commit}"
 source=(
-  "git+${_url}.git#${_tag_name}=${_commi}"
+  "git+${_url}.git#${_tag_name}=${_commit}"
 )
 sha256sums=(
   'SKIP'
 )
 
 build() {
+  local \
+    _cflags=()
+  _cflags+=(
+    "${CFLAGS}"
+  )
+  if [[ "${_os}" == "GNU/Linux" ]]; then
+    _cflags+=(
+      '-ffat-lto-objects'
+    )
+  fi
   cd \
     "${_pkg}"
+  export \
+    CFLAGS="${_cflags[*]}"
   env \
     CARGO_INCREMENTAL=0 \
+    CFLAGS="${_cflags[*]}" \
   cargo \
     build \
       --release
